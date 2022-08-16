@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Price</title>
+</head>
+<body>
+<div align="center">
+    <p  th:text="${courier.name}" ></p>
+    <p  >new price</p>
+    <br />
+    <a th:href=@{/courier_transfers/new_price_product/{id}(id=${courier.id})}" >Add </a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e : ${prices}">
+            <td th:text="${e.key.name}">Product</td>
+            <td th:text="${e.value}">Price</td>
+            <td>
+                <a href=#>Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

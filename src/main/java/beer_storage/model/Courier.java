@@ -14,12 +14,12 @@ public class Courier {
     @Column(name = "name")
     String name;
 
-    @ElementCollection
-    @CollectionTable(name = "products_of_courier",
-            joinColumns = {@JoinColumn(name = "courier_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "item_name")
-    @Column(name = "quantity")
-    public Map<Product, Integer> products;
+//    @ElementCollection
+//    @CollectionTable(name = "transfers_of_courier",
+//            joinColumns = {@JoinColumn(name = "courier_id", referencedColumnName = "id")})
+//    @MapKeyColumn(name = "item_name")
+//    @Column(name = "quantity")
+//    public Map<TransferOfCourier, Integer> transfers;
 
     @ElementCollection
     @CollectionTable(name = "price_products_of_courier",
@@ -29,15 +29,16 @@ public class Courier {
     public Map<Product, Integer> priceProducts;
 
     @Column(name = "debt")
-    String debt;
+    Integer debt;
 
     public Courier() {
     }
 
-    public Courier(Long id, String name, Map<Product, Integer> products, Map<Product, Integer> priceProducts, String debt) {
+    public Courier(Long id, String name,// Map<TransferOfCourier, Integer> transfers,
+                   Map<Product, Integer> priceProducts, Integer debt) {
         this.id = id;
         this.name = name;
-        this.products = products;
+       // this.transfers = transfers;
         this.priceProducts = priceProducts;
         this.debt = debt;
     }
@@ -58,19 +59,19 @@ public class Courier {
         this.name = name;
     }
 
-    public Map<Product, Integer> getProducts() {
-        return products;
-    }
+//    public Map<TransferOfCourier, Integer> getTransfers() {
+//        return transfers;
+//    }
+//
+//    public void setTransfers(Map<TransferOfCourier, Integer> transfers) {
+//        this.transfers = transfers;
+//    }
 
-    public void setProducts(Map<Product, Integer> products) {
-        this.products = products;
-    }
-
-    public String getDebt() {
+    public Integer getDebt() {
         return debt;
     }
 
-    public void setDebt(String debt) {
+    public void setDebt(Integer debt) {
         this.debt = debt;
     }
 

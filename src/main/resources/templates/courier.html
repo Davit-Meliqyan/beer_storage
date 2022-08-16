@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Courier</title>
+</head>
+<body>
+<div align="center">
+    <h1>Couriers</h1>
+    <a href="/new_courier">Create New Courier</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Courier ID</th>
+            <th>Name</th>
+            <th>Debt</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="courier : ${listCourier}">
+            <td th:text="${courier.id}">Courier ID</td>
+            <td > <a th:href="@{courier_transfers/{id}(id=${courier.id})}" , th:text="${courier.name}">Name</a></td>
+            <td th:text="${courier.debt}">Debt</td>
+            <td>
+                <a th:href="@{edit_courier/{id}(id=${courier.id})}">Edit</a>
+                <a th:href="@{'/delete_courier/' + ${courier.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

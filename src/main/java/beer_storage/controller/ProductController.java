@@ -21,18 +21,18 @@ public class ProductController {
     private String getAllProducts(Model model) {
         List<Product> listProduct = productService.loadAllProducts();
         model.addAttribute("listProduct", listProduct);
-        return "product/product";
+        return "product";
     }
 
     @RequestMapping("/new_product")
     public String showNewProductPage(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "product/new_product";
+        return "new_product";
     }
 
     @RequestMapping(path = "/save_product", method = RequestMethod.POST)
-    public String saveNewProduct(@ModelAttribute("book") Product product) {
+    public String saveNewProduct(@ModelAttribute("product") Product product) {
         productService.saveProduct(product);
         return "redirect:/product";
     }
@@ -41,7 +41,7 @@ public class ProductController {
     private String editProduct(@PathVariable("id") Long id, Model model) {
         Product product = productService.loadProductById(id);
         model.addAttribute("product", product);
-        return "product/edit_product";
+        return "edit_product";
     }
 
     @RequestMapping(path = "/edit_product/{id}", method = RequestMethod.POST)

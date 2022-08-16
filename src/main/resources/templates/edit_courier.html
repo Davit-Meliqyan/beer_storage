@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Edit Courier</title>
+</head>
+<body>
+<div align="center">
+    <h1>Edit Courier</h1>
+    <form form action="#" th:action="@{/edit_courier/{id}(id=${courier.id})}"
+          th:object="${courier}" method="POST">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" th:field="*{name}"
+                           name="name" />
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+</body>
+</body>
+</html>

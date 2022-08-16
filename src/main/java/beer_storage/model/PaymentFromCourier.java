@@ -2,11 +2,11 @@ package beer_storage.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Map;
+
 
 @Entity
-@Table(name = "transfers")
-public class Transfer {
+@Table(name = "payment_from_courier")
+public class PaymentFromCourier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,25 +15,21 @@ public class Transfer {
     @Column(name = "time")
     private LocalDateTime time;
 
-    @ElementCollection
-    @CollectionTable(name = "products_of_transfer",
-            joinColumns = {@JoinColumn(name = "transfer_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "item_name")
-    @Column(name = "quantity")
-    public Map<Product, Integer> products;
+    @Column(name = "pay")
+    private Integer pay;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "courier_id",
-            foreignKey = @ForeignKey(name = "courier_transfer_fk"))
+            foreignKey = @ForeignKey(name = "courier_payment_fk"))
     private Courier courier;
 
-    public Transfer() {
+    public PaymentFromCourier() {
     }
 
-    public Transfer(Long id, LocalDateTime time, Map<Product, Integer> products, Courier courier) {
+    public PaymentFromCourier(Long id, LocalDateTime time, Integer pay, Courier courier) {
         this.id = id;
         this.time = time;
-        this.products = products;
+        this.pay = pay;
         this.courier = courier;
     }
 
@@ -53,12 +49,12 @@ public class Transfer {
         this.time = time;
     }
 
-    public Map<Product, Integer> getProducts() {
-        return products;
+    public Integer getPay() {
+        return pay;
     }
 
-    public void setProducts(Map<Product, Integer> products) {
-        this.products = products;
+    public void setPay(Integer pay) {
+        this.pay = pay;
     }
 
     public Courier getCourier() {
@@ -68,4 +64,6 @@ public class Transfer {
     public void setCourier(Courier courier) {
         this.courier = courier;
     }
+
+
 }
