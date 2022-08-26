@@ -7,7 +7,7 @@
 <body>
 <div align="center">
     <h1 th:text="${courier.name}"></h1>
-    <a th:href="@{new_transfer/{id}(id=${courier.id})}">Create New Transfer</a>
+    <a th:href="@{courier_new_transfer/{id}(id=${courier.id})}">Create New Transfer</a>
     <br/><br/>
     <table border="1" cellpadding="10">
         <thead>
@@ -27,20 +27,8 @@
         </th:block>
     </table>
     <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th th:each="e : ${priceProducts}" , th:text="${e.key.name}"></th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-            <tr >
-                <td th:each="e : ${priceProducts}" , th:text="${e.value}"></td>
-                <td>
-                    <a th:href="@{prices_product/{id}(id=${courier.id})}">More</a>
-                </td>
-            </tr>
-    </table>
+
+
 </div>
 </body>
 </html>

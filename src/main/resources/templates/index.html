@@ -7,13 +7,10 @@
 <body>
 <h1>Welcome</h1>
 <hr>
-<div th:fragment="header(par)">
-    <div>
-        <ul>
-            <li><a th:href="@{/product}">Product</a></li>
-            <li><a th:href="@{/courier}">Courier</a></li>
-        </ul>
-    </div>
-</div>
+<nav th:fragment="menu">
+    <a th:href="@{/product}">Product</a>
+    <a th:href="@{/courier}">Courier</a>
+    <a th:href="@{/transfer}">Transfer</a>
+</nav>
 </body>
 </html>

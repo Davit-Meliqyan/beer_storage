@@ -1,10 +1,7 @@
 package beer_storage.controller;
 
 import beer_storage.model.Courier;
-import beer_storage.model.Product;
-import beer_storage.model.TransferOfCourier;
 import beer_storage.service.CourierService;
-import beer_storage.service.TransferOfCourierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

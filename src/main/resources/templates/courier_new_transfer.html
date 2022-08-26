@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Create New Transfer</title>
 </head>
 <body>
+
 <div align="center">
-    <p  th:text="${courier.name}" ></p>
-    <p  >new transfer</p>
-    <br />
-    <form action="#" th:action="@{/save_transfer}" th:object="${transfer}"
+    <h1>Create New Transfer</h1>
+    <h1 th:text="${courier.name}"></h1>
+    <br/>
+
+    <form action="#" th:action="@{/save_new_transfer}" th:object="${transfer}"
           method="post">
 
 
         <table border="0" cellpadding="10">
+            <thead>
             <tr>
-                <td>Product Name:</td>
-                <td><input type="text" th:field="*{name}" /></td>
+                <th>Product</th>
+                <th>Quantity</th>
             </tr>
-            <tr>
-                <td>Cost Price:</td>
-                <td><input type="text" th:field="*{costPrice}" /></td>
+            </thead>
+
+
+
+            <tr th:each="entry, stats : ${transferProducts}" th:with="quantity=${entry.value}">
+                <td th:text="${entry.key.name}">product name</td>
             </tr>
-            <tr>
-                <td colspan="2"><button type="submit">Save</button> </td>
-            </tr>
+
+
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Save</button>
+                    </td>
+                </tr>
         </table>
+    </form>
+
+    <form th:object="${transfer}">
+        <input th:each="entry: ${transfer.products}" type="text" th:field="*{products['__${entry.key}__']}" />
     </form>
 </div>
 </body>
