@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:utext="${courier.name}">Courier</title>
+</head>
+<body>
+
+<nav th:replace="index :: menu"></nav>
+<h1 th:text="${courier.name}"></h1>
+<div th:replace="transfer :: transfer"></div>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <td th:each="priceProduct : ${listPriceProduct}">
+            <table border="1" cellpadding="10">
+                <tr>
+                    <td th:text="${priceProduct.product.name}">Product Name</td>
+                </tr>
+                <tr>
+                    <td th:text="${priceProduct.price}">Price</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a th:href="@{edit_price_of_product/{id}(id=${priceProduct.id})}">Edit</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

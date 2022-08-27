@@ -2,6 +2,7 @@ package beer_storage.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +21,9 @@ public class Transfer {
     @Column(name = "time")
     private LocalDateTime time;
 
-    @OneToMany(mappedBy="transfer")
-    private List<TransferNode> transferNodes;
+
+    @OneToMany(mappedBy = "transfer", cascade = CascadeType.PERSIST)
+    List<TransferNode> transferNodes = new ArrayList<>();
 
     public Transfer() {
     }

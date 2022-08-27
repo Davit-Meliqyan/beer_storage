@@ -38,4 +38,8 @@ public class TransferService {
     public Transfer updateTransfer(Transfer transfer) {
         return transferRepo.save(transfer);
     }
+
+    public List<Transfer> loadTransferByCourier(Courier courier) {
+        return transferRepo.findTransferByCourier(courier);
+    }
 }

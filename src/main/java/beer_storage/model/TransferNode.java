@@ -18,8 +18,9 @@ public class TransferNode {
             foreignKey = @ForeignKey(name = "transfer_transfer_node_fk"))
     private Transfer transfer;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id",
+            foreignKey = @ForeignKey(name = "product_transfer_node_fk"))
     private Product product;
 
     public TransferNode() {

@@ -1,10 +1,12 @@
 package beer_storage.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Entity
-@Table(name = "couriers")
+@Table(name = "courier")
 public class Courier {
 
     @Id
@@ -14,33 +16,24 @@ public class Courier {
     @Column(name = "name")
     String name;
 
-//    @ElementCollection
-//    @CollectionTable(name = "transfers_of_courier",
-//            joinColumns = {@JoinColumn(name = "courier_id", referencedColumnName = "id")})
-//    @MapKeyColumn(name = "item_name")
-//    @Column(name = "quantity")
-//    public Map<TransferOfCourier, Integer> transfers;
-
-    @ElementCollection
-    @CollectionTable(name = "price_products_of_courier",
-            joinColumns = {@JoinColumn(name = "courier_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "item_name")
-    @Column(name = "price")
-    public Map<Product, Integer> priceProducts;
-
     @Column(name = "debt")
     Integer debt;
+
+    @OneToMany(mappedBy = "courier", cascade = CascadeType.PERSIST)
+    List<Transfer> transfers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "courier", cascade = CascadeType.PERSIST)
+    List<PriceProduct> priceProducts = new ArrayList<>();
 
     public Courier() {
     }
 
-    public Courier(Long id, String name,// Map<TransferOfCourier, Integer> transfers,
-                   Map<Product, Integer> priceProducts, Integer debt) {
+    public Courier(Long id, String name, Integer debt, List<Transfer> transfers, List<PriceProduct> priceProducts) {
         this.id = id;
         this.name = name;
-       // this.transfers = transfers;
-        this.priceProducts = priceProducts;
         this.debt = debt;
+        this.transfers = transfers;
+        this.priceProducts = priceProducts;
     }
 
     public Long getId() {
@@ -59,14 +52,6 @@ public class Courier {
         this.name = name;
     }
 
-//    public Map<TransferOfCourier, Integer> getTransfers() {
-//        return transfers;
-//    }
-//
-//    public void setTransfers(Map<TransferOfCourier, Integer> transfers) {
-//        this.transfers = transfers;
-//    }
-
     public Integer getDebt() {
         return debt;
     }
@@ -75,11 +60,19 @@ public class Courier {
         this.debt = debt;
     }
 
-    public Map<Product, Integer> getPriceProducts() {
+    public List<Transfer> getTransfers() {
+        return transfers;
+    }
+
+    public void setTransfers(List<Transfer> transfers) {
+        this.transfers = transfers;
+    }
+
+    public List<PriceProduct> getPriceProducts() {
         return priceProducts;
     }
 
-    public void setPriceProducts(Map<Product, Integer> priceProducts) {
+    public void setPriceProducts(List<PriceProduct> priceProducts) {
         this.priceProducts = priceProducts;
     }
 }

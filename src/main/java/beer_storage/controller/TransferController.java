@@ -8,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+
 
 @Controller
 public class TransferController {
 
     @Autowired
     private TransferService transferService;
+
 
     @RequestMapping( "/transfer")
     private String getAllTransfers(Model model) {
@@ -23,6 +26,8 @@ public class TransferController {
         model.addAttribute("listTransfer", listTransfer);
         return "transfer";
     }
+
+
 
     @RequestMapping("/new_transfer")
     public String showNewTransferPage(Model model) {

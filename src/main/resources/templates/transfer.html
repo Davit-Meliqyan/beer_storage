@@ -6,42 +6,49 @@
 </head>
 <body>
 <nav th:replace="index :: menu"></nav>
-<div align="center">
-    <h1>Products</h1>
-    <a href="/new_transfer">Create New Transfer</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Courier</th>
-            <th>Time</th>
+<div th:fragment="transfer">
+    <div align="center">
+        <h1>Transfers</h1>
+        <a href="/new_transfer">Create New Transfer</a>
+        <br/><br/>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Courier</th>
+                <th>Time</th>
 
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="transfer : ${listTransfer}">
-            <td th:text="${transfer.id}">ID</td>
-            <td th:text="${transfer.courier.name}">Courier name</td>
-            <td th:text="${transfer.time}">Time</td>
-            <td th:each="transferNode : ${transfer.transferNodes}">
-                <table  border="1" cellpadding="10">
-                    <tr>
-                        <td th:text="${transferNode.product.name}">Product Name</td>
-                    </tr>
-                    <tr>
-                        <td th:text="${transferNode.quantity}">Quantity</td>
-                    </tr>
-                </table>
-            </td>
-            <td>
-                <a th:href="@{edit_transfer/{id}(id=${transfer.id})}">Edit</a>
-                <a th:href="@{'/delete_transfer/' + ${transfer.id}}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transfer : ${listTransfer}">
+                <td th:text="${transfer.id}">ID</td>
+                <td>
+                    <a th:href="@{courier_transfers/{id}(id=${transfer.courier.id})}"
+                       th:text="${transfer.courier.name}">
+                        Courier Name
+                    </a>
+                </td>
+                <td th:text="${transfer.time}">Time</td>
+                <td th:each="transferNode : ${transfer.transferNodes}">
+                    <table border="1" cellpadding="10">
+                        <tr>
+                            <td th:text="${transferNode.product.name}">Product Name</td>
+                        </tr>
+                        <tr>
+                            <td th:text="${transferNode.quantity}">Quantity</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <a th:href="@{edit_transfer/{id}(id=${transfer.id})}">Edit</a>
+                    <a th:href="@{'/delete_transfer/' + ${transfer.id}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
