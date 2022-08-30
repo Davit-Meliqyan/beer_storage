@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "paymentes_from_courier")
+@Table(name = "payments_from_courier")
 public class PaymentFromCourier {
 
     @Id

@@ -1,9 +1,11 @@
 package beer_storage.controller;
 
 import beer_storage.model.Courier;
+import beer_storage.model.PaymentFromCourier;
 import beer_storage.model.PriceProduct;
 import beer_storage.model.Transfer;
 import beer_storage.service.CourierService;
+import beer_storage.service.PaymentFromCourierService;
 import beer_storage.service.PriceProductService;
 import beer_storage.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class PriceProductController {
     private CourierService courierService;
     @Autowired
     private PriceProductService priceProductService;
+    @Autowired
+    private PaymentFromCourierService payService;
 
 
     @RequestMapping("/courier_transfers/{id}")
@@ -31,8 +35,11 @@ public class PriceProductController {
         Courier courier = courierService.loadCourierById(id);
         List<Transfer> listTransfer = transferService.loadTransferByCourier(courier);
         List<PriceProduct> listPriceProduct = priceProductService.loadAllPriceProductOfCourier(courier);
+        List<PaymentFromCourier> listPays = payService.loadPaymentByCourier(courier);
+
 
         model.addAttribute("listTransfer", listTransfer);
+        model.addAttribute("listPays", listPays);
         model.addAttribute("listPriceProduct", listPriceProduct);
         model.addAttribute("courier", courier);
 

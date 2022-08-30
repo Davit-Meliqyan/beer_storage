@@ -27,9 +27,4 @@ public class PriceProductService {
         priceProduct.setCourier(loadPriceProductById(id).getCourier());
         return priceProductRepo.save(priceProduct);
     }
-
-//    public Courier updateCourier(Courier courier, Long id) {
-//        courier.setDebt(loadCourierById(id).getDebt());
-//        return courierRepo.save(courier);
- //   }
 }

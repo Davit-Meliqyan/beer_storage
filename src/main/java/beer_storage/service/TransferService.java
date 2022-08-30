@@ -1,6 +1,7 @@
 package beer_storage.service;
 
 import beer_storage.model.Courier;
+import beer_storage.model.PriceProduct;
 import beer_storage.model.Transfer;
 import beer_storage.model.TransferNode;
 import beer_storage.repo.TransferNodeRepo;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TransferService {
@@ -37,25 +39,30 @@ public class TransferService {
     public Transfer saveTransfer(Transfer transfer) {
 
 
-     //   transferNodeRepo.saveAll(transfer.getTransferNodes());
-        for (TransferNode transferNode: transfer.getTransferNodes()) {
+        Courier courier = transfer.getCourier();
+        Integer total = courier.getDebt();
 
+        for (TransferNode transferNode : transfer.getTransferNodes()) {
 
             transferNodeRepo.save(transferNode);
 
+            for (PriceProduct priceProduct : courier.getPriceProducts()) {
+                if (Objects.equals(priceProduct.getProduct().getId(), transferNode.getProduct().getId())) {
+                    total += priceProduct.getPrice() * transferNode.getQuantity();
+                }
+            }
         }
 
+        courier.setDebt(total);
         transfer.setTime(LocalDateTime.now());
-//        Courier courier = courierService.loadCourierById(id);
-//        transfer.setCourier(courier);
         transferRepo.save(transfer);
 
-        for (TransferNode transferNode: transfer.getTransferNodes()) {
+        for (TransferNode transferNode : transfer.getTransferNodes()) {
             transferNode.setTransfer(transfer);
             transferNodeRepo.save(transferNode);
         }
 
-       return loadTransferById(transfer.getId());
+        return loadTransferById(transfer.getId());
     }
 
     public void deleteTransfer(Long id) {

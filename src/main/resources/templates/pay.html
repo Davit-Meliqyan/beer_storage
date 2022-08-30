@@ -1,0 +1,41 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payments</title>
+</head>
+<body>
+<nav th:replace="index :: menu"></nav>
+<div align="center">
+    <h1>Payments</h1>
+
+    <a href="/new_pay">Create New Pay</a>
+    <div th:fragment="pay">
+        <br/><br/>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>Pay ID</th>
+                <th>Courier Name</th>
+                <th>Pay</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pay : ${listPays}">
+                <td th:text="${pay.id}">Pay ID</td>
+                <td><a th:href="@{courier_pays/{id}(id=${pay.courier.id})}" ,
+                       th:text="${pay.courier.name}">Name</a></td>
+                <td th:text="${pay.pay}">Pay</td>
+                <td th:text="${pay.time}">Pay</td>
+                <td>
+                    <!--                <a th:href="@{edit_courier/{id}(id=${courier.id})}">Edit</a>-->
+                    <!--                <a th:href="@{'/delete_courier/' + ${courier.id}}">Delete</a>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

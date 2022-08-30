@@ -5,16 +5,19 @@
     <title th:utext="${courier.name}">Courier</title>
 </head>
 <body>
-
 <nav th:replace="index :: menu"></nav>
 <h1 th:text="${courier.name}"></h1>
+<h3>Պարտք</h3>
+<h3 th:text="${courier.debt}"></h3>
 <div align="center">
     <h1>Transfers</h1>
 
     <a th:href="@{/new_transfer/{id}(id=${courier.id})}">Create New Transfer</a>
     <br/><br/>
 
+
     <div th:replace="transfer :: transfer"></div>
+
 </div>
 <table border="1" cellpadding="10">
     <tr>
@@ -35,6 +38,12 @@
         </td>
     </tr>
 </table>
+<br/><br/>
+<a th:href="@{/new_pay/{id}(id=${courier.id})}">Create New Pay(վճարում առաքիչից)</a>
+<br/><br/>
+
+<div th:replace="pay :: pay"></div>
+
 
 </body>
 </html>

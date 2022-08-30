@@ -1,11 +1,9 @@
 package beer_storage.controller;
 
 
-import beer_storage.model.Courier;
-import beer_storage.model.PriceProduct;
-import beer_storage.model.Transfer;
-import beer_storage.model.TransferNode;
+import beer_storage.model.*;
 import beer_storage.service.CourierService;
+import beer_storage.service.PaymentFromCourierService;
 import beer_storage.service.PriceProductService;
 import beer_storage.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,8 @@ public class TransferController {
     private CourierService courierService;
     @Autowired
     private PriceProductService priceProductService;
+    @Autowired
+    private PaymentFromCourierService payService;
 
 
     @RequestMapping( "/transfer")
@@ -59,11 +59,15 @@ public class TransferController {
             listTransferNode.add(transferNode);
         }
         transfer.setTransferNodes(listTransferNode);
-       // transferService.saveTransfer(transfer);
+
+
+        List<PaymentFromCourier> listPays = payService.loadPaymentByCourier(courier);
+
 
         model.addAttribute("transfer", transfer);
         model.addAttribute("courier", courier);
         model.addAttribute("listTransferNode", listTransferNode);
+        model.addAttribute("listPays", listPays);
 
 
         return "new_transfer";
@@ -71,28 +75,14 @@ public class TransferController {
 
     @RequestMapping(path = "/save_transfer/{courierName}", method = RequestMethod.POST)
     public String saveNewTransfer(@PathVariable("courierName") String courierName,@ModelAttribute("transfer") Transfer transfer) {
-       // transferNodeRepo.saveAll(transfer.getTransferNodes());
-//        Courier courier = courierService.loadCourierById(id);
-//        transfer.setCourier(courier);
 
         Courier courier = courierService.loadCourierByName(courierName);
         transfer.setCourier(courier);
 
-
         transferService.saveTransfer(transfer);
-
 
         return "redirect:/courier_transfers/" + courier.getId();
     }
-
-//    @PostMapping(value = "/save_transfer")
-//    public String saveTransfer1(@ModelAttribute Transfer transfer, Model model) {
-//       // bookService.saveAll(form.getBooks());
-//        transferService.saveAll(transfer.getTransferNodes());
-//        model.addAttribute("books", transferService.findAll());
-//
-//        return "redirect:/books/all";
-//    }
 
     @RequestMapping("/edit_transfer/{id}")
     private String editTransfer(@PathVariable("id") Long id, Model model) {

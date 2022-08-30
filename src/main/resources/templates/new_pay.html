@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Create New Pay</title>
+</head>
+<body>
+<div align="center">
+    <h1 th:text="${courier.name}"></h1>
+    <h1>Create New Pay</h1>
+    <br/>
+    <form action="#" class="form-horizontal"
+          th:action="@{/save_pay/{courierName}(courierName=${courier.name})}"
+          th:object="${pay}"
+          method="post">
+        <fieldset>
+					<span class="pull-right">
+						    <button type="submit">Save</button>
+					</span>
+            <table class="table">
+                <tr>
+                    <td>Courier Name:</td>
+                    <td th:text="${courier.name}"></td>
+                </tr>
+                <tr>
+                    <td>Pay:</td>
+                    <td><input type="text" th:field="*{pay}" /></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

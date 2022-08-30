@@ -25,15 +25,19 @@ public class Courier {
     @OneToMany(mappedBy = "courier", cascade = CascadeType.PERSIST)
     List<PriceProduct> priceProducts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "courier", cascade = CascadeType.PERSIST)
+    List<PaymentFromCourier> paymentFromCouriers = new ArrayList<>();
+
     public Courier() {
     }
 
-    public Courier(Long id, String name, Integer debt, List<Transfer> transfers, List<PriceProduct> priceProducts) {
+    public Courier(Long id, String name, Integer debt, List<Transfer> transfers, List<PriceProduct> priceProducts, List<PaymentFromCourier> paymentFromCouriers) {
         this.id = id;
         this.name = name;
         this.debt = debt;
         this.transfers = transfers;
         this.priceProducts = priceProducts;
+        this.paymentFromCouriers = paymentFromCouriers;
     }
 
     public Long getId() {
@@ -74,5 +78,13 @@ public class Courier {
 
     public void setPriceProducts(List<PriceProduct> priceProducts) {
         this.priceProducts = priceProducts;
+    }
+
+    public List<PaymentFromCourier> getPaymentFromCouriers() {
+        return paymentFromCouriers;
+    }
+
+    public void setPaymentFromCouriers(List<PaymentFromCourier> paymentFromCouriers) {
+        this.paymentFromCouriers = paymentFromCouriers;
     }
 }

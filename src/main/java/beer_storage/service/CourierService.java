@@ -45,12 +45,6 @@ public class CourierService {
         return loadCourierById(courier.getId());
     }
 
-//    public Courier savePriceProduct(Courier courier, Product product,Integer price) {
-//        Map<Product, Integer> products = courier.getPriceProducts();
-//        products.put(product,price);
-//        return loadCourierById(courier.getId());
-//    }
-
     public void deleteCourier(Long id) {
 
        // Courier courier = loadCourierById(id);
