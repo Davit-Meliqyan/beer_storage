@@ -11,4 +11,5 @@ import java.util.List;
 public interface TransferRepo extends JpaRepository<Transfer,Long> {
 
     List<Transfer> findTransferByCourier(Courier courier);
+
 }

@@ -39,7 +39,7 @@ public class PriceProductController {
         return "transfers_of_courier";
     }
 
-    @RequestMapping("/courier_transfers/edit_price_of_product/{id}")
+    @RequestMapping("/edit_price_of_product/{id}")
     private String editPriceProduct(@PathVariable("id") Long id, Model model) {
         PriceProduct priceProduct = priceProductService.loadPriceProductById(id);
         model.addAttribute("priceProduct", priceProduct );
@@ -47,7 +47,7 @@ public class PriceProductController {
         return "edit_price_product";
     }
 
-    @RequestMapping(path = "/courier_transfers/edit_price_of_product/{id}",
+    @RequestMapping(path = "/edit_price_of_product/{id}",
             method = RequestMethod.POST)
     private String updatePriceProduct(@PathVariable("id") Long id,
                                       @ModelAttribute PriceProduct priceProduct) {

@@ -6,11 +6,12 @@
 </head>
 <body>
 <nav th:replace="index :: menu"></nav>
-<div th:fragment="transfer">
-    <div align="center">
-        <h1>Transfers</h1>
-        <a href="/new_transfer">Create New Transfer</a>
-        <br/><br/>
+
+<div align="center">
+    <h1>Transfers</h1>
+    <a href="/new_transfer">Create New Transfer</a>
+    <br/><br/>
+    <div th:fragment="transfer">
         <table border="1" cellpadding="10">
             <thead>
             <tr>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Create New Transfer</title>
+</head>
+<body>
+<div align="center">
+    <h1 th:text="${courier.name}"></h1>
+    <h1>Create New Transfer</h1>
+    <br/>
+    <form action="#" class="form-horizontal"
+          th:action="@{/save_transfer/{courierName}(courierName=${courier.name})}"
+          th:object="${transfer}"
+          method="post">
+        <fieldset>
+					<span class="pull-right">
+						    <button type="submit">Save</button>
+					</span>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th> Product</th>
+                    <th> Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="transferNode, itemStat : *{transferNodes}">
+                    <td>
+                        <input type="hidden"
+                               th:placeholder="${transferNode.product.id}"
+                               th:field="*{transferNodes[__${itemStat.index}__].product.id}" readonly/>
+                    </td>
+                    <td>
+                        <input th:placeholder="${transferNode.product.name}"
+                               th:field="*{transferNodes[__${itemStat.index}__].product.name}" readonly/>
+                    </td>
+                    <!--            th:text="${transferNode.product.name}"        <input type="hidden"-->
+                    <!--                           th:value="${transferNode.product}"-->
+                    <!--                           th:attr="name='transferNodes[' + ${itemStat.index} + '].product'">-->
+                    <td>
+                        <input th:field="*{transferNodes[__${itemStat.index}__].quantity}" required/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

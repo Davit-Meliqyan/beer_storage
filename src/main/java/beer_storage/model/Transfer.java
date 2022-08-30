@@ -66,4 +66,5 @@ public class Transfer {
     public void setTransferNodes(List<TransferNode> transferNodes) {
         this.transferNodes = transferNodes;
     }
+
 }

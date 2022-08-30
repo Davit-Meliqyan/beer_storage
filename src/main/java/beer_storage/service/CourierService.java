@@ -28,7 +28,9 @@ public class CourierService {
     public Courier loadCourierById(Long id) {
         return courierRepo.findById(id).get();
     }
-
+    public Courier loadCourierByName(String name) {
+        return courierRepo.findByName(name).get();
+    }
     public Courier saveCourier(Courier courier) {
         courier.setDebt(0);
         courierRepo.save(courier);

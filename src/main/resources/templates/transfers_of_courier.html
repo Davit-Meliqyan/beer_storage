@@ -8,8 +8,14 @@
 
 <nav th:replace="index :: menu"></nav>
 <h1 th:text="${courier.name}"></h1>
-<div th:replace="transfer :: transfer"></div>
+<div align="center">
+    <h1>Transfers</h1>
 
+    <a th:href="@{/new_transfer/{id}(id=${courier.id})}">Create New Transfer</a>
+    <br/><br/>
+
+    <div th:replace="transfer :: transfer"></div>
+</div>
 <table border="1" cellpadding="10">
     <tr>
         <td th:each="priceProduct : ${listPriceProduct}">
@@ -22,12 +28,13 @@
                 </tr>
                 <tr>
                     <td>
-                        <a th:href="@{edit_price_of_product/{id}(id=${priceProduct.id})}">Edit</a>
+                        <a th:href="@{/edit_price_of_product/{id}(id=${priceProduct.id})}">Edit</a>
                     </td>
                 </tr>
             </table>
         </td>
     </tr>
 </table>
+
 </body>
 </html>
